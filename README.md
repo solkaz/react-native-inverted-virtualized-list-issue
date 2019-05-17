@@ -1,12 +1,6 @@
-# `react-native-template-ts-detox-jest`
+# `react-native-inverted-virtualized-list-issue`
 
-React Native template that incorporates TypeScript, Detox, and Jest.
-
-## Usage
-
-```sh
-react-native init MyAppName --template ts-detox-jest && node MyAppName/postInstall.js
-```
+Attempting to demonstrate an issue with inverted `VirtualizedList`s when rendered in Android.
 
 ## License
 
