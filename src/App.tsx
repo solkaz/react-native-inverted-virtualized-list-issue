@@ -16,7 +16,7 @@ import {
   View,
 } from "react-native";
 
-const data = Array(100).map((x) => Math.floor(Math.random() * 100));
+const data = Array.from({ length: 50 }, (x) => Math.floor(Math.random() * 100));
 
 export default class App extends Component {
   public render() {
@@ -34,7 +34,7 @@ export default class App extends Component {
 
   private renderItem = ({ item, index }: ListRenderItemInfo<number>) => (
     <View>
-      <Text>
+      <Text testID={index.toString()}>
         {item} - {index}
       </Text>
     </View>
