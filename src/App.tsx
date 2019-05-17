@@ -25,16 +25,24 @@ export default class App extends Component {
         <FlatList
           data={data}
           inverted
-          renderItem={this.renderItem}
+          renderItem={this.renderItem("inverted")}
+          keyExtractor={this.keyExtractor}
+        />
+        <FlatList
+          data={data}
+          renderItem={this.renderItem("uninverted")}
           keyExtractor={this.keyExtractor}
         />
       </View>
     );
   }
 
-  private renderItem = ({ item, index }: ListRenderItemInfo<number>) => (
+  private renderItem = (prefix: "inverted" | "uninverted") => ({
+    item,
+    index,
+  }: ListRenderItemInfo<number>) => (
     <View>
-      <Text testID={index.toString()}>
+      <Text testID={`${prefix} + ${index.toString()}`}>
         {item} - {index}
       </Text>
     </View>
@@ -45,8 +53,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     backgroundColor: "#F5FCFF",
   },
 });
