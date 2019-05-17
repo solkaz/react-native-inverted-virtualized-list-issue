@@ -1,20 +1,22 @@
 // This _must_ be renamed because the typings for Detox declare `detox` as a global const
-const detox_ = require("detox");
-const config = require("./package.json").detox;
+import { init, cleanup } from "detox";
 const adapter = require("detox/runners/jest/adapter");
 
+const config = require("./package.json").detox;
+
 jest.setTimeout(120000);
-jasmine.getEnv().addReporter(adapter);
+(jasmine as any).getEnv().addReporter(adapter);
 
 beforeAll(async () => {
-  await detox_.init(config);
+  await init(config, { initGlobals: false });
 });
 
 beforeEach(async () => {
   await adapter.beforeEach();
+  await device.reloadReactNative();
 });
 
 afterAll(async () => {
   await adapter.afterAll();
-  await detox_.cleanup();
+  await cleanup();
 });

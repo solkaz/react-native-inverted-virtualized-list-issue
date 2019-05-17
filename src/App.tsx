@@ -23,12 +23,14 @@ export default class App extends Component {
     return (
       <View testID="welcome" style={styles.container}>
         <FlatList
+          testID="invertedList"
           data={data}
           inverted
           renderItem={this.renderItem("inverted")}
           keyExtractor={this.keyExtractor}
         />
         <FlatList
+          testID="uninvertedList"
           data={data}
           renderItem={this.renderItem("uninverted")}
           keyExtractor={this.keyExtractor}
@@ -42,7 +44,7 @@ export default class App extends Component {
     index,
   }: ListRenderItemInfo<number>) => (
     <View>
-      <Text testID={`${prefix} + ${index.toString()}`}>
+      <Text testID={`${prefix}-${index.toString()}`}>
         {item} - {index}
       </Text>
     </View>

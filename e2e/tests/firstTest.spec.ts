@@ -1,35 +1,23 @@
+import { by, expect, element, device } from "detox";
+
 describe("Example", () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
 
-  it("should have welcome screen", async () => {
-    await expect(element(by.id("welcome"))).toBeVisible();
+  it("can scroll a normal list", async () => {
+    const invertedList = element(by.id("invertedList"));
+    await expect(invertedList).toExist();
+    await expect(element(by.id("inverted-0"))).toBeVisible();
+    await invertedList.scrollTo("top");
+    await expect(element(by.id("inverted-0"))).toBeNotVisible();
   });
 
-  it("should show hello screen after tap", async () => {
-    await element(by.id("button")).tap();
-    await expect(element(by.text("Hello World!"))).toBeVisible();
-    await element(by.text("OK")).tap();
-  });
-
-  it("should reverse text in text input", async () => {
-    const input = "abcdefghijklmnopqrstuvwxyz";
-    await element(by.id("textInput")).tap();
-    await element(by.id("textInput")).typeText(input);
-    await expect(element(by.id("reversedText"))).toHaveText(
-      reverse("abcdefghijklmnopqrstuvwxyz")
-    );
+  it("can scroll an uninverted list", async () => {
+    const uninvertedList = element(by.id("uninvertedList"));
+    await expect(uninvertedList).toExist();
+    await expect(element(by.id("uninverted-0"))).toBeVisible();
+    await uninvertedList.scrollTo("top");
+    await expect(element(by.id("uninverted-0"))).toBeNotVisible();
   });
 });
-
-// Verify that we can use TypeScript constructs
-function reverse(a?: string) {
-  if (a) {
-    return a
-      .split("")
-      .reverse()
-      .join("");
-  }
-  return "";
-}
